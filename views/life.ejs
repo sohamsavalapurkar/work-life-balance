@@ -1,0 +1,91 @@
+<%- include ('partials/header') %>
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="col-md-12">
+                <div class="brand">
+                    <img src="img/logo.PNG" alt="bootstrap 4 login page">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title" align="center"><b>Life Details</b></h4>
+                        <!-- <h4 class="card-title">Life Details</h4> -->
+                        <form method="POST" class="my-login-validation" novalidate="" action="/work">
+            
+                            <div class="row">
+                                <div class="col">
+                                    <label for="family"> Family</label>
+                                    <select class="form-select mt-1" name="familydetails" id="family" aria-label="Default select example">
+                                        <option selected>Select</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                
+                                <input type="hidden" id= 'username' name='username' value='<%= data.email %>'>
+                                <input type="hidden" id='name' name='name' value='<%= data.name %>'>
+                                <input type="hidden" name='password' name='password' value='<%= data.password %>'>
+                                <div class="col">
+                                    <label for="leisuretime">Leisure Time</label>
+                                    <input id="leisuretime" type="number" min="0" class="form-control mt-1" placeholder="in Hrs" name="leisuretime" required autofocus>
+                                    <div class="invalid-feedback">
+                                        Please provide leisure time
+                                    </div>
+                                </div>
+                            </div>
+
+                            &nbsp;
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="kids">No of Kids</label>
+                                    <input id="kids" type="number" min="0" class="form-control mt-1" name="kids">
+                                </div>
+                                <!-- <div class="invalid-feedback">
+                                    Invalid email
+                                </div> -->
+                                <div class="col">
+                                    <label for="sleeptime">Sleep Time</label>
+                                    <input id="sleeptime" type="number" min="0"class="form-control mt-1" placeholder="in Hrs" name="sleeptime" required autofocus>
+                                </div>
+                            </div>
+
+                            &nbsp;
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="hobbies">Hobbies</label>
+                                    <select class="form-select mt-1" name="hobbies" id="hobbies" aria-label="Default select example">
+                                        <option selected>Select</option>
+                                        <option value="Basketball">Basketball</option>
+                                        <option value="Photography">Photography</option>
+                                        <option value="Reading">Reading</option>
+                                    </select>
+                                  
+                                </div>
+
+                                <div class="col">
+                                    <label for="comments">Comments</label>
+                                    <textarea class="form-control mt-1" name="comments_life" id="comments_life" placeholder="Details related to schedule" aria-label="With textarea"></textarea>
+                                </div>
+                            </div>
+
+                            &nbsp;
+
+
+                            <div class="form-group mt-2 d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    Next
+                                </button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<%- include ('partials/footer') %>

@@ -1,0 +1,92 @@
+var express = require('express');
+var router = express.Router();
+var passport = require('passport');
+var Account = require('../models/account');
+
+var monk = require('monk');
+var db = monk('localhost:27017/stressbusters');
+var userDetails = db.get('userDetails');
+//var accountDetails = db.get('accountDetails');
+//var cart = db.get('cart');
+//var orderedItems = db.get('orderedItems');
+
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index', {});
+});
+
+router.get('/signup', function(req, res) {
+	res.render('signup', {});
+});
+
+router.post('/work', function(req, res) {
+  
+	res.render('work', {data: req.body});
+});
+
+router.post('/life', function(req, res) {
+  
+	res.render('life', {data: req.body});
+});
+
+router.post('/insertData', function(req, res) {
+  console.log(req.body)
+  Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+    if (err) {
+      return res.render('work', { account : account });
+    }
+    userDetails.insert({
+      username: req.body.username,
+      name: req.body.name,
+      profession: req.body.profession,
+      screentime: req.body.screentime,
+      familydetails: req.body.familydetails,
+      leisuretime: req.body.leisuretime,
+      kids: req.body.kids,
+      sleeptime: req.body.sleeptime,
+      hobbies: req.body.hobbies,
+      comments_life: req.body.comments_life,
+      company: req.body.company,
+      breaktime: req.body.breaktime,
+      position: req.body.position,
+      worktime: req.body.worktime,
+      techs: req.body.techs,
+      comments_works: req.body.comments_works
+      
+    }, function(err, account) {
+        passport.authenticate('local')(req, res, function() {
+          res.redirect('/homepage')
+        });
+    })
+    
+  });
+});
+
+router.get('/homepage', function(req, res) {
+  if(req.user) {
+		console.log(req.user.username);
+		userDetails.find({username: req.user.username}, function(err, userDetail) {
+			if (err) throw error;
+			console.log(userDetail[0].name);
+			res.render('homepage', {user: req.user, userDetails: userDetail[0]});
+		})
+	}
+});
+
+
+router.post('/signup', function(req, res) {
+  
+});  
+
+
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  res.redirect('/homepage');
+});
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+
+module.exports = router;
