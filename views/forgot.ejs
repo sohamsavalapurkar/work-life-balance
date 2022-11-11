@@ -1,0 +1,53 @@
+<%- include ('partials/header') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-4 px-lg-5">
+		<a class="navbar-brand" href="/"><span class="text-danger">Stress</span><span class="text-primary">Busters</span></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+				<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+			</ul>
+			<form class="d-flex">
+				<div class="text-center"><a class="btn btn-outline-light mt-auto" href="/">Login</a></div>
+			</form>
+			
+		</div>
+	</div>
+  </nav>
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center align-items-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="img/logo.PNG" alt="bootstrap 4 login page">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Forgot Password</h4>
+                        <form method="POST" class="my-login-validation" novalidate="">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+                                <div class="invalid-feedback">
+                                    Invalid email
+                                </div>
+                                <div class="form-text text-muted">
+                                    Please click "Send link" to get a password reset link
+                                </div>
+                            </div>
+
+                            <div class="form-group m-0">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Send link
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include ('partials/footer') %>

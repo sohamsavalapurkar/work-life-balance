@@ -7,6 +7,7 @@ var monk = require('monk');
 var db = monk('localhost:27017/stressbusters');
 var userDetails = db.get('userDetails');
 //var accountDetails = db.get('accountDetails');
+var discussions = ['BAC is very good company', 'Must work at GAC', 'HKI Company has good balance but my team is very bad', 'FHD has horrible WFL', 'OPJ is a great place to work for']
 //var cart = db.get('cart');
 //var orderedItems = db.get('orderedItems');
 
@@ -27,6 +28,9 @@ router.post('/work', function(req, res) {
 router.post('/life', function(req, res) {
   
 	res.render('life', {data: req.body});
+});
+router.get('/forgot', function(req, res) {
+  res.render('forgot', {});
 });
 
 router.post('/insertData', function(req, res) {
@@ -68,7 +72,7 @@ router.get('/homepage', function(req, res) {
 		userDetails.find({username: req.user.username}, function(err, userDetail) {
 			if (err) throw error;
 			console.log(userDetail[0].name);
-			res.render('homepage', {user: req.user, userDetails: userDetail[0]});
+			res.render('homepage', {user: req.user, userDetails: userDetail[0], discussions: discussions});
 		})
 	}
 });
@@ -78,8 +82,13 @@ router.post('/signup', function(req, res) {
   
 });  
 
-
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: '/homepage',
+//   failureRedirect: '/', // see text
+//   failureFlash: true // optional, see text as well
+// }));
 router.post('/login', passport.authenticate('local'), function(req, res) {
+  
   res.redirect('/homepage');
 });
 

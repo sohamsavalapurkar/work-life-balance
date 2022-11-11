@@ -56,6 +56,11 @@ body.my-login-page {
 	color: #888;
 	text-align: left;
 }
+.v-divider{
+	width:2px;
+	height:100%;
+	border-left:1px solid black;
+   }
 
 @media screen and (max-width: 425px) {
 	.my-login-page .card-wrapper {
