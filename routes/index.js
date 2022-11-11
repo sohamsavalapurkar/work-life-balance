@@ -10,10 +10,12 @@ var userDetails = db.get('userDetails');
 var discussions = ['BAC is very good company', 'Must work at GAC', 'HKI Company has good balance but my team is very bad', 'FHD has horrible WFL', 'OPJ is a great place to work for']
 //var cart = db.get('cart');
 //var orderedItems = db.get('orderedItems');
+const fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', {});
+
 });
 
 router.get('/signup', function(req, res) {
@@ -71,8 +73,14 @@ router.get('/homepage', function(req, res) {
 		console.log(req.user.username);
 		userDetails.find({username: req.user.username}, function(err, userDetail) {
 			if (err) throw error;
-			console.log(userDetail[0].name);
-			res.render('homepage', {user: req.user, userDetails: userDetail[0], discussions: discussions});
+      fs.readFile('routes/discussions.json', (err, data) => {
+        if (err) throw err;
+        let discussions = JSON.parse(data);
+        console.log(discussions);
+        console.log(userDetail[0]);
+			  res.render('homepage', {user: req.user, userDetails: userDetail[0], discussions: discussions});
+    });
+			
 		})
 	}
 });

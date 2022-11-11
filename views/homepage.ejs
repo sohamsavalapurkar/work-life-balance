@@ -28,22 +28,25 @@
         </div>
         <div class="col-md-4 v-divider ml-2">
             <h2>Top Discussions</h2>
-            <% var cnt=0 
-			discussions.forEach(function(discussion){ 
-				if(cnt < 4){%>
-                    <div class="card mb-2">
+                <input type="text" id="searchBar" name="title" onkeyup="keyUpFunc()" class="form-control mb-2" placeholder="Search Companies">
+            
+                <% var cnt=0 
+			    discussions.forEach(function(discussion){%> 
+                    <div class="card mb-2" id="<%= discussion.id %>">
                         <div class="card-header">
-                          Quote
+                            <%= discussion.Company %>
                         </div>
                         <div class="card-body">
                           <blockquote class="blockquote mb-0">
-                            <p><%= discussion %></p>
-                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                            <p><%= discussion.Answer %></p>
+                            <footer class="blockquote-footer">Anonymous<cite title="Source Title"></cite></footer>
                           </blockquote>
                         </div>
                     </div>
 			<% cnt++;
-		}}); %>
+		}); %>
+            
+            
             
         </div>
     </div>
@@ -52,9 +55,46 @@
 
 <script>
     var data = <%- JSON.stringify(userDetails) %>;
+    var discussions = <%- JSON.stringify(discussions) %>;
+    console.log(discussions[0])
     var interval = parseInt(data.screentime) * 1000 * 2
     var breaktime = data.breaktime
     setInterval(function() { alert("You have worked continuously for " + data.screentime + "hrs consider taking a break for " + breaktime + " minutes"); }, interval);
+    cnt = 0
+    discussions.forEach(function(discussion) {
+
+        if(cnt < 4) {
+            document.getElementById(discussion.id).style.display = "block";
+    
+        }
+        else {
+            document.getElementById(discussion.id).style.display = "none";
+        }
+        cnt += 1
+    })
+
+    function keyUpFunc() {
+		input = document.getElementById('searchBar');
+  		filter = input.value.toUpperCase();
+        cnt = 1
+		discussions.forEach(function(discussion) {
+            
+			if(discussion.Company.toUpperCase().indexOf(filter) > -1) {
+                    if(cnt > 4) {
+                        document.getElementById(discussion.id).style.display = "none";
+                    }
+                    else {
+                        document.getElementById(discussion.id).style.display = "block";
+                        cnt += 1
+                    }
+				
+			}
+           
+			else {
+				document.getElementById(discussion.id).style.display = "none";
+			}
+		})
+	}
 </script>
 
 <%- include ('partials/footer') %>
