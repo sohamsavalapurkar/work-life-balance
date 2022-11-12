@@ -10,11 +10,14 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var multer = require('multer');
+var connectDB = require('./config/db');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+connectDB();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +40,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://localhost:27017/stressbusters');
+// mongoose.connect('mongodb://localhost:27017/stressbusters');
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
