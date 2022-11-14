@@ -34,7 +34,7 @@
             
                 <% var cnt=0 
 			    discussions.forEach(function(discussion){%> 
-                    <div class="card mb-2" id="<%= discussion.id %>">
+                    <div class="card mb-2" id="<%= discussion._id %>">
                         <div class="card-header">
                             <%= discussion.Company %>
                         </div>
@@ -48,7 +48,7 @@
 			<% cnt++;
 		}); %>   
             <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#addreviewmodal">
-                Launch demo modal
+                Add Review
               </button>
             
       
@@ -61,19 +61,35 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Add Review</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              
+                <form method="POST" class="my-login-validation" action='/addReview' novalidate="">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label for="Company">Company</label>
+                            <input id="company" name="company" type="text" class="form-control" required autofocus>
+                            <div class="invalid-feedback">
+                                Company
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label for="comments">Review</label>
+                            <textarea class="form-control" name="review" id="review" placeholder="Enter Review" aria-label="With textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2 d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 </div>
 
 <script>
@@ -281,11 +297,11 @@
     discussions.forEach(function(discussion) {
 
         if(cnt < 4) {
-            document.getElementById(discussion.id).style.display = "block";
+            document.getElementById(discussion._id).style.display = "block";
     
         }
         else {
-            document.getElementById(discussion.id).style.display = "none";
+            document.getElementById(discussion._id).style.display = "none";
         }
         cnt += 1
     })
@@ -298,17 +314,17 @@
             
 			if(discussion.Company.toUpperCase().indexOf(filter) > -1) {
                     if(cnt > 4) {
-                        document.getElementById(discussion.id).style.display = "none";
+                        document.getElementById(discussion._id).style.display = "none";
                     }
                     else {
-                        document.getElementById(discussion.id).style.display = "block";
+                        document.getElementById(discussion._id).style.display = "block";
                         cnt += 1
                     }
 				
 			}
            
 			else {
-				document.getElementById(discussion.id).style.display = "none";
+				document.getElementById(discussion._id).style.display = "none";
 			}
 		})
 	}

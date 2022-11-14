@@ -7,18 +7,8 @@ var Account = require("../models/account");
 var monk = require("monk");
 var db = monk(config.get("mongoURI"));
 var userDetails = db.get("userDetails");
+var reviews = db.get("reviews")
 
-//var accountDetails = db.get('accountDetails');
-var discussions = [
-  "BAC is very good company",
-  "Must work at GAC",
-  "HKI Company has good balance but my team is very bad",
-  "FHD has horrible WFL",
-  "OPJ is a great place to work for",
-];
-//var cart = db.get('cart');
-//var orderedItems = db.get('orderedItems');
-const fs = require("fs");
 
 /* GET home page. */
 router.get("/", function (req, res) {
@@ -90,29 +80,32 @@ router.get("/homepage", function (req, res) {
       { username: req.user.username },
       function (err, userDetail) {
         if (err) throw error;
-        fs.readFile("routes/discussions.json", (err, data) => {
+        reviews.find({}, function(err, review) {
           if (err) throw err;
-          let discussions = JSON.parse(data);
-          console.log(discussions);
-          console.log(userDetail[0]);
           res.render("homepage", {
             user: req.user,
             userDetails: userDetail[0],
-            discussions: discussions,
+            discussions: review,
           });
-        });
-      }
-    );
+        })
+          
+      });
   }
 });
 
-router.post("/signup", function (req, res) {});
 
-// router.post('/login', passport.authenticate('local', {
-//   successRedirect: '/homepage',
-//   failureRedirect: '/', // see text
-//   failureFlash: true // optional, see text as well
-// }));
+router.post("/addReview", function(req, res){
+    console.log(req.body)
+    reviews.insert({
+      Company : req.body.company,
+      Answer : req.body.review
+    }, function(err, account) {
+        if (err) throw err;
+        res.redirect('/homepage');
+    });
+});
+
+
 router.post("/login", passport.authenticate("local"), function (req, res) {
   res.redirect("/homepage");
 });
