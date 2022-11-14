@@ -53,9 +53,13 @@
 </div>
 
 <script>
+console.log('i reached here');
     var data = JSON.stringify(userDetails);
+    console.log('now here');
     var discussions = JSON.stringify(discussions);
+    console.log('then here');
     console.log(discussions[0])
+    console.log('finally here');
     var interval = parseInt(data.screentime) * 1000 * 2
     var breaktime = data.breaktime
     setInterval(function() { alert("You have worked continuously for " + data.screentime + "hrs consider taking a break for " + breaktime + " minutes"); }, interval);
