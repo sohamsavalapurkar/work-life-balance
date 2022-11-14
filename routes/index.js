@@ -74,10 +74,11 @@ router.get('/homepage', function(req, res) {
 		userDetails.find({username: req.user.username}, function(err, userDetail) {
 			if (err) throw error;
       fs.readFile('routes/discussions.json', (err, data) => {
-        if (err) throw err;
+        if (err) {console.log('if error');throw err};
+	      console.log('out')
         let discussions = JSON.parse(data);
-        console.log(discussions);
-        console.log(userDetail[0]);
+        console.log('parsed here', discussions);
+        console.log('last step here',userDetail[0]);
 			  res.render('homepage', {user: req.user, userDetails: userDetail[0], discussions: discussions});
     });
 			
