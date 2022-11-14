@@ -70,7 +70,7 @@ router.post('/insertData', function(req, res) {
 
 router.get('/homepage', function(req, res) {
   if(req.user) {
-		console.log(req.body.username);
+		console.log(req.user.username);
 		userDetails.find({username: req.user.username}, function(err, userDetail) {
 			if (err) console.log(err.message);
       fs.readFile('routes/discussions.json', (err, data) => {
@@ -82,7 +82,7 @@ router.get('/homepage', function(req, res) {
 			  res.render('homepage', {user: req.user, userDetails: userDetail[0], discussions: discussions});
     });
 			
-		})
+		}).then(data => console.log(data)).catch(err => console.log(err.message))
 	}
 });
 
