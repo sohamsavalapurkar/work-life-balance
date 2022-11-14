@@ -6,8 +6,8 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/homepage">Home</a></li>
-                <li class="nav-item"><a class="nav-link " href="/planner">Planner</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/homepage">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/planner">Planner</a></li>
             </ul>
             <div class="btn-group">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,31 +25,9 @@
 </nav>
 <div class="container">
     <div class="row justify-content-md-center">
-        <div id='calendar' class="col-md-8 bg-white">
+        <div id='calendar' class="col-md-12 bg-white">
 
         </div>
-        <div class="col-md-4 v-divider ml-2">
-            <h2>Top Discussions</h2>
-                <input type="text" id="searchBar" name="title" onkeyup="keyUpFunc()" class="form-control mb-2" placeholder="Search Companies">
-            
-                <% var cnt=0 
-			    discussions.forEach(function(discussion){%> 
-                    <div class="card mb-2" id="<%= discussion.id %>">
-                        <div class="card-header">
-                            <%= discussion.Company %>
-                        </div>
-                        <div class="card-body">
-                          <blockquote class="blockquote mb-0">
-                            <p><%= discussion.Answer %></p>
-                            <footer class="blockquote-footer">Anonymous<cite title="Source Title"></cite></footer>
-                          </blockquote>
-                        </div>
-                    </div>
-			<% cnt++;
-		}); %>   
-        <div class="text-center"><a class="btn btn-primary d-grid" href="/">Add Review</a></div>
-        </div>
-        
     </div>
 
 </div>
@@ -65,7 +43,7 @@
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: ''
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
           },
           navLinks: true, // can click day/week names to navigate views
           editable: true,
@@ -247,49 +225,7 @@
         
         calendar.render();
       });
-    var data = <%-JSON.stringify(userDetails) %>;
     
-    var discussions = <%-JSON.stringify(discussions)%>;
-    
-    console.log(discussions[0])
-    var interval = parseInt(data.screentime) * 1000 * 2
-    var breaktime = data.breaktime
-    setInterval(function() { alert("You have worked continuously for " + data.screentime + "hrs consider taking a break for " + breaktime + " minutes"); }, interval);
-    cnt = 0
-    discussions.forEach(function(discussion) {
-
-        if(cnt < 4) {
-            document.getElementById(discussion.id).style.display = "block";
-    
-        }
-        else {
-            document.getElementById(discussion.id).style.display = "none";
-        }
-        cnt += 1
-    })
-
-    function keyUpFunc() {
-		input = document.getElementById('searchBar');
-  		filter = input.value.toUpperCase();
-        cnt = 1
-		discussions.forEach(function(discussion) {
-            
-			if(discussion.Company.toUpperCase().indexOf(filter) > -1) {
-                    if(cnt > 4) {
-                        document.getElementById(discussion.id).style.display = "none";
-                    }
-                    else {
-                        document.getElementById(discussion.id).style.display = "block";
-                        cnt += 1
-                    }
-				
-			}
-           
-			else {
-				document.getElementById(discussion.id).style.display = "none";
-			}
-		})
-	}
 </script>
 
 <%- include ('../partials/footer') %>

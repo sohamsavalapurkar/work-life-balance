@@ -78,3 +78,7 @@ body.my-login-page {
 		padding: 15px;
 	}
 }
+
+
+/* classes attached to <body> */
+/* TODO: make fc-event selector work when calender in shadow DOM */

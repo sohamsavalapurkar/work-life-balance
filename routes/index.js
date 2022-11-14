@@ -25,6 +25,12 @@ router.get("/", function (req, res) {
   res.render("index", {});
 });
 
+router.get("/work", function(req, res) {
+  if(req.user) {
+    res.render("work", {user:req.user});
+  }
+});
+
 router.get("/signup", function (req, res) {
   res.render("signup", {});
 });
@@ -110,7 +116,22 @@ router.post("/signup", function (req, res) {});
 router.post("/login", passport.authenticate("local"), function (req, res) {
   res.redirect("/homepage");
 });
-
+router.get("/planner", function (req, res) {
+  if (req.user) {
+    console.log(req.user.username);
+    userDetails.find(
+      { username: req.user.username },
+      function (err, userDetail) {
+        if (err) throw error;
+          res.render("planner", {
+            user: req.user,
+            userDetails: userDetail[0],
+            discussions: discussions,
+          });
+      }
+    );
+  }
+});
 router.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");
