@@ -70,11 +70,11 @@ router.post('/insertData', function(req, res) {
 
 router.get('/homepage', function(req, res) {
   if(req.user) {
-		console.log(userDetails);
+		console.log(req.body.username);
 		userDetails.find({username: req.user.username}, function(err, userDetail) {
-			if (err) throw error;
+			if (err) console.log(err.message);
       fs.readFile('routes/discussions.json', (err, data) => {
-        if (err) {console.log('if error');throw err};
+        if (err) console.log('if error ',err.message);
 	      console.log('out')
         let discussions = JSON.parse(data);
         console.log('parsed here', discussions);
