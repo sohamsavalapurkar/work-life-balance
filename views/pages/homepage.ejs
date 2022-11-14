@@ -53,8 +53,8 @@
 </div>
 
 <script>
-    var data = <%- JSON.stringify(userDetails) %>;
-    var discussions = <%- JSON.stringify(discussions) %>;
+    var data = JSON.stringify(userDetails);
+    var discussions = JSON.stringify(discussions);
     console.log(discussions[0])
     var interval = parseInt(data.screentime) * 1000 * 2
     var breaktime = data.breaktime
