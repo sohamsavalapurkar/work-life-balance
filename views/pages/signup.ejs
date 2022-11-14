@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-group mt-2">
-                                <label for="password">Confirm Password</label>
+                                <label for="confirm-password">Confirm Password</label>
                                 <input id="confirm-password" type="password" class="form-control" name="confirm-password" placeholder="Re-enter Password" required data-eye />
                                 <div class="invalid-feedback">
                                     Please confirm the password
@@ -124,6 +124,9 @@
     
     }
     function validateForm() {
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+        var confirmPassword = document.getElementById("confirm-password");
         var form = document.getElementById("myForm");
         if(email.value == '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
             email.classList.add("error");

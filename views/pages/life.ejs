@@ -25,12 +25,12 @@
                     <div class="card-body">
                         <h4 class="card-title" align="center"><b>Life Details</b></h4>
                         <!-- <h4 class="card-title">Life Details</h4> -->
-                        <form method="POST" class="my-login-validation" novalidate="" action="/work">
+                        <form method="POST" class="my-login-validation" action="/work">
             
                             <div class="row">
                                 <div class="col">
                                     <label for="family"> Family</label>
-                                    <select class="form-select mt-1" name="familydetails" id="family" aria-label="Default select example">
+                                    <select class="form-select mt-1" name="familydetails" id="family" aria-label="Default select example" onchange="disable('family', 'kids')" required>
                                         <option selected>Select</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -102,13 +102,17 @@
     </div>
 </section>
 <script>
-    function validateForm() {
-        let x = document.forms["myForm"]["fname"].value;
-        if (x == "") {
-            alert("Name must be filled out");
-            return false;
-        }
-    }
+   function disable(select_val,input_id) {
+                var e = document.getElementById(select_val);
+                var strUser = e.options[e.selectedIndex].value;
+                if(strUser === "Yes"){
+                    document.getElementById(input_id).disabled = false;
+                }
+                else{
+                    document.getElementById(input_id).value = document.getElementById(input_id).defaultValue;
+                    document.getElementById(input_id).disabled = true;
+                }
+}
 </script>
 
 <%- include ('../partials/footer') %>
