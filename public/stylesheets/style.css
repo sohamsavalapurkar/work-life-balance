@@ -78,7 +78,10 @@ body.my-login-page {
 		padding: 15px;
 	}
 }
-
+.error {
+	background: #fcc;
+	border: 2px solid #c99;
+}
 
 /* classes attached to <body> */
 /* TODO: make fc-event selector work when calender in shadow DOM */

@@ -85,7 +85,7 @@ router.get("/homepage", function (req, res) {
           res.render("homepage", {
             user: req.user,
             userDetails: userDetail[0],
-            discussions: review,
+            discussions: review
           });
         })
           
@@ -118,8 +118,7 @@ router.get("/planner", function (req, res) {
         if (err) throw error;
           res.render("planner", {
             user: req.user,
-            userDetails: userDetail[0],
-            discussions: discussions,
+            userDetails: userDetail[0]
           });
       }
     );

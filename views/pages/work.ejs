@@ -109,5 +109,13 @@
             </div>
         </div>
 </section>
-
+<script>
+    function validateForm() {
+        let x = document.forms["myForm"]["fname"].value;
+        if (x == "") {
+            alert("Name must be filled out");
+            return false;
+        }
+    }
+</script>
 <%- include ('../partials/footer') %>

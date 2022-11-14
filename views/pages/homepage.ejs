@@ -290,7 +290,7 @@
     var discussions = <%-JSON.stringify(discussions)%>;
     
     console.log(discussions[0])
-    var interval = parseInt(data.screentime) * 1000 * 2
+    var interval = parseInt(data.screentime) * 1000 * 4
     var breaktime = data.breaktime
     setInterval(function() { alert("You have worked continuously for " + data.screentime + "hrs consider taking a break for " + breaktime + " minutes"); }, interval);
     cnt = 0
@@ -328,6 +328,7 @@
 			}
 		})
 	}
+
 </script>
 
 <%- include ('../partials/footer') %>
