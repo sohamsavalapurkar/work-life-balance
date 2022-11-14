@@ -43,8 +43,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <% if (user) { 
-                            }else{%>
+                            
                             <input type="hidden" id= 'username' name='username' value='<%= data.username %>'>
                             <input type="hidden" id='name' name='name' value='<%= data.name %>'>
                             <input type="hidden" name='password' name='password' value='<%= data.password %>'>
@@ -54,7 +53,6 @@
                             <input type="hidden" id='sleeptime' name='sleeptime' value='<%= data.sleeptime %>'>
                             <input type="hidden" id='hobbies' name='hobbies' value='<%= data.hobbies %>'>
                             <input type="hidden" id='comments_life' name='comments_life' value='<%= data.comments_life %>'>
-                            <%}%>
                             <div class="row mt-2">
                                 <div class="col">
                                     <label for="company">Company Name</label>
