@@ -1,4 +1,4 @@
-<%- include ('partials/header') %>
+<%- include ('../partials/header') %>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container px-4 px-lg-5">
@@ -53,9 +53,13 @@
 </div>
 
 <script>
-    var data = <%- JSON.stringify(userDetails) %>;
-    var discussions = <%- JSON.stringify(discussions) %>;
+console.log('i reached here');
+    var data = JSON.stringify(userDetails);
+    console.log('now here');
+    var discussions = JSON.stringify(discussions);
+    console.log('then here');
     console.log(discussions[0])
+    console.log('finally here');
     var interval = parseInt(data.screentime) * 1000 * 2
     var breaktime = data.breaktime
     setInterval(function() { alert("You have worked continuously for " + data.screentime + "hrs consider taking a break for " + breaktime + " minutes"); }, interval);
@@ -96,4 +100,4 @@
 	}
 </script>
 
-<%- include ('partials/footer') %>
+<%- include ('../partials/footer') %>
