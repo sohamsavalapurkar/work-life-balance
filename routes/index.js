@@ -68,24 +68,22 @@ router.post('/insertData', function(req, res) {
   });
 });
 
-router.get('/homepage', function(req, res) {
-  if(req.user) {
-		console.log(req.user.username);
-		userDetails.find({username: req.user.username}, function(err, userDetail) {
-			if (err) console.log(err.message);
-      fs.readFile('routes/discussions.json', (err, data) => {
-        if (err) console.log('if error ',err.message);
-	      console.log('out')
-        let discussions = JSON.parse(data);
-        console.log('parsed here', discussions);
-        console.log('last step here',userDetail[0]);
-			  res.render('homepage', {user: req.user, userDetails: userDetail[0], discussions: discussions});
-    });
-			
-		}).then(data => console.log(data)).catch(err => console.log(err.message))
-	}
+router.get("/homepage", function (req, res) {
+  if (req.user) {
+    console.log('printing here ',req.user.username);
+    userDetails.find(
+      { username: req.user.username },
+      function (err, userDetail) {
+        if (err) console.log(err.message);
+        res.render("homepage", {
+            user: req.user,
+            userDetails: userDetail[0],
+            discussions: discussions,
+          });
+      }
+    );
+  }
 });
-
 
 router.post('/signup', function(req, res) {
   
