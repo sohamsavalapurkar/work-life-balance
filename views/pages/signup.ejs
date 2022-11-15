@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <h4 class="card-title" align="center"><b>Welcome to <span class="text-danger">Stress</span><span class="text-primary">Busters</span> !</b></h4>
                         <h4 class="card-title" align="center">Sign Up</h4>
-                        <form method="POST" class="my-login-validation" onsubmit="return validateForm()" id="myForm" action="/life">
+                        <form method="POST" class="my-login-validation" onSubmit="return validateForm()" id="myForm" action="/life">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input id="name" type="text" class="form-control" name="name" required autofocus placeholder="Enter your full name" />
@@ -64,10 +64,10 @@
                                     Register
                                 </button>
                             </div>
-                            <div class="mt-4 text-center">
-                                Already have an account? <a href="/">Login</a>
-                            </div>
                         </form>
+                        <div class="mt-4 text-center">
+                            Already have an account? <a href="/">Login</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -127,17 +127,20 @@
         var email = document.getElementById("email");
         var password = document.getElementById("password");
         var confirmPassword = document.getElementById("confirm-password");
+        console.log(conf)
         var form = document.getElementById("myForm");
         if(email.value == '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
             email.classList.add("error");
             span1.style.display = "inline";
             e.preventDefault();
+            return false
         }
         if(!password.value.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/)) {
             password.classList.add("error");  
             span2.style.display = "inline";
             
             e.preventDefault();
+            return false
         }
         if(password.value != confirmPassword.value) {
             password.classList.add("error");
@@ -145,7 +148,9 @@
             span3.style.display = "inline";
             confirmPassword.classList.add("error");
             e.preventDefault();
+            return false
         }
+
     }
 </script>
 <%- include ('../partials/footer') %>

@@ -225,7 +225,22 @@
         
         calendar.render();
       });
+    var data = <%-JSON.stringify(userDetails) %>;
+    var interval = parseInt(data.screentime) * 1000 * 2
     
+    setInterval(function() { if (window.confirm('New Tech Updates in ' + data.techs + ' If you click "ok" you would be redirected . Cancel will load this website ')) 
+{
+    if(data.techs == "Python") {
+        window.location.href='https://docs.python.org/3/whatsnew/index.html';
+    }
+    else if(data.techs == "Java") {
+        window.location.href='https://www.oracle.com/java/technologies/javase/8-whats-new.html';
+    }
+    else if(data.techs == "C++") {
+        window.location.href='https://www.mycplus.com/featured-articles/cplusplus-17-features/';
+    }
+
+}; }, interval);
 </script>
 
 <%- include ('../partials/footer') %>
