@@ -1,20 +1,27 @@
 <%- include ('../partials/header') %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container px-4 px-lg-5">
-		<a class="navbar-brand" href="/"><span class="text-danger">Stress</span><span class="text-primary">Busters</span></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-				<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-			</ul>
-			<form class="d-flex">
-				<div class="text-center"><a class="btn btn-outline-light mt-auto" href="/">Login</a></div>
-			</form>
-			
-		</div>
-	</div>
-  </nav>
-
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/homepage"><span class="text-danger">Stress</span><span class="text-primary">Busters</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/homepage">Home</a></li>
+                <li class="nav-item"><a class="nav-link " href="/planner">Planner</a></li>
+            </ul>
+            <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> <%= data.name %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/work"><i class="bi bi-briefcase"></i> Work</a></li>
+                  <li><a class="dropdown-item" href="/life"><i class="bi bi-person-square"></i> Life</a></li>
+                  <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
+                </ul>
+              </div>
+            
+        </div>
+    </div>
+</nav>
 <section class="h-100">
     <div class="container h-100">
         <div class="row justify-content-md-center h-100">
@@ -26,18 +33,18 @@
                     <div class="card-body">
                         <!-- <h4 class="card-title" align="center"><b>Welcome to Stressbusters!</b></h4> -->
                         <h4 class="card-title" align="center"><b>Work Details</b></h4>
-                        <form method="POST" class="my-login-validation" action='/insertData' >
+                        <form method="POST" class="my-login-validation" action="/update_details/<%= data._id %>?_method=PUT" >
                             <div class="row mt-2">
                                 <div class="col">
                                     <label for="profession">Profession</label>
-                                    <input id="profession" name="profession" type="text" class="form-control" name="profession" required autofocus>
+                                    <input id="profession" name="profession" value="<%= data.profession %>" type="text" class="form-control" name="profession" required autofocus>
                                     <div class="invalid-feedback">
                                         Please enter your profession
                                     </div>
                                 </div>
                                 <div class="col">
                                     <label for="screentime">Screen Time</label>
-                                    <input id="screentime" name="screentime" type="number" class="form-control" name="screentime" required autofocus>
+                                    <input id="screentime" name="screentime" type="number" value="<%= data.screentime %>" class="form-control" name="screentime" required autofocus>
                                     <div class="invalid-feedback">
                                         Please enter the screen time in hours
                                     </div>
@@ -56,36 +63,36 @@
                             <div class="row mt-2">
                                 <div class="col">
                                     <label for="company">Company Name</label>
-                                    <input id="company" name="company" type="text" class="form-control" name="company">
+                                    <input id="company" name="company" type="text" value="<%= data.company %>" class="form-control" name="company">
                                 </div>
                                 <div class="col">
                                     <label for="breaktime">Break Time</label>
-                                    <input id="breaktime" name="breaktime" type="number" class="form-control" placeholder="in min" name="breaktime" required autofocus>
+                                    <input id="breaktime" name="breaktime" type="number" value="<%= data.breaktime %>" class="form-control" placeholder="in min" name="breaktime" required autofocus>
                                 </div>
                             </div>
 
                             <div class="row mt-2">
                                 <div class="col">
                                     <label for="position">Position</label>
-                                    <input id="position" name="position" type="text" class="form-control" name="position">
+                                    <input id="position" name="position" type="text" value="<%= data.position %>" class="form-control" name="position">
                                 </div>
                                 <!-- <div class="invalid-feedback">
                                     Invalid email
                                 </div> -->
                                 <div class="col">
                                     <label for="worktime">Daily working hours</label>
-                                    <input id="worktime" name="worktime" type="number" class="form-control" name="worktime" required autofocus>
+                                    <input id="worktime" name="worktime" type="number" value="<%= data.worktime %>" class="form-control" name="worktime" required autofocus>
                                 </div>
                             </div>
 
                             <div class="row mt-2">
                                 <div class="col">
-                                    <label for="worktime">Tools & Technology</label>
+                                    <label for="techs">Tools & Technology</label>
                                     <select class="form-select" name="techs" id="techs" aria-label="Default select example">
-                                    <option selected disabled hidden>Please select</option>
-                                    <option value="C++">C++</option>
-                                    <option value="Python">Python</option>
-                                    <option value="Java">Java</option>
+                                        <option selected disabled hidden>Please select</option>
+                                        <option value="C++">C++</option>
+                                        <option value="Python">Python</option>
+                                        <option value="Java">Java</option>
                                     </select>
                                         </div>
                                         <!-- <div class="invalid-feedback">
@@ -93,14 +100,14 @@
                                         </div> -->
                                         <div class="col">
                                             <label for="comments">Comments</label>
-                                            <textarea class="form-control" name="comments_work" id="comments_work" placeholder="Details related to schedule" aria-label="With textarea"></textarea>
+                                            <textarea class="form-control" name="comments_work"  id="comments_work" placeholder="Details related to schedule" aria-label="With textarea"><%= data.comments_work %></textarea>
                                         </div>
                                     </div>
                                 </div>
 
                             <div class="form-group mt-2 d-grid">
                                 <button type="submit" class="btn btn-primary">
-                                    Submit
+                                    Update
                                 </button>
                             </div>
                         </form>
@@ -109,7 +116,18 @@
             </div>
         </div>
 </section>
-<script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#techs").val("Python");
+});
+
+    </script>
+    
+<!-- <script>
+window.onload = function(){
+    var country = document.getElementById("techs");
+    country.options[country.options.selectedIndex].setAttribute("selected", "selected");
+}
     function validateForm() {
         let x = document.forms["myForm"]["fname"].value;
         if (x == "") {
@@ -117,5 +135,5 @@
             return false;
         }
     }
-</script>
+</script> -->
 <%- include ('../partials/footer') %>

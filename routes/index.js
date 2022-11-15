@@ -15,9 +15,35 @@ router.get("/", function (req, res) {
   res.render("index", {});
 });
 
-router.get("/work", function(req, res) {
-  if(req.user) {
-    res.render("work", {user:req.user});
+router.get("/work", function (req, res) {
+  if (req.user) {
+    console.log(req.user.username);
+    userDetails.find(
+      { username: req.user.username },
+      function (err, userDetail) {
+        if (err) throw error;
+          res.render("work_update", {
+            user: req.user,
+            data: userDetail[0]
+          });
+      }
+    );
+  }
+});
+
+router.get("/life", function (req, res) {
+  if (req.user) {
+    console.log(req.user.username);
+    userDetails.find(
+      { username: req.user.username },
+      function (err, userDetail) {
+        if (err) throw error;
+          res.render("life_updates", {
+            user: req.user,
+            data: userDetail[0]
+          });
+      }
+    );
   }
 });
 
@@ -124,6 +150,36 @@ router.get("/planner", function (req, res) {
     );
   }
 });
+
+router.put('/update_details/:id', function(req, res) {
+		
+		userDetails.update({_id : req.params.id},
+			{ $set: {
+        username: req.body.username,
+        name: req.body.name,
+        profession: req.body.profession,
+        screentime: req.body.screentime,
+        familydetails: req.body.familydetails,
+        leisuretime: req.body.leisuretime,
+        kids: req.body.kids,
+        sleeptime: req.body.sleeptime,
+        hobbies: req.body.hobbies,
+        comments_life: req.body.comments_life,
+        company: req.body.company,
+        breaktime: req.body.breaktime,
+        position: req.body.position,
+        worktime: req.body.worktime,
+        techs: req.body.techs,
+        comments_works: req.body.comments_works,
+			}}, function(err, details) {
+				if (err) throw err;
+				//if update is successful it will return update video object
+				res.redirect('/homepage');
+			  });
+	
+});
+
+
 router.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");

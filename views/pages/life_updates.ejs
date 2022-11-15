@@ -1,19 +1,27 @@
 <%- include ('../partials/header') %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container px-4 px-lg-5">
-		<a class="navbar-brand" href="/"><span class="text-danger">Stress</span><span class="text-primary">Busters</span></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-				<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-			</ul>
-			<form class="d-flex">
-				<div class="text-center"><a class="btn btn-outline-light mt-auto" href="/">Login</a></div>
-			</form>
-			
-		</div>
-	</div>
-  </nav>
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/homepage"><span class="text-danger">Stress</span><span class="text-primary">Busters</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/homepage">Home</a></li>
+                <li class="nav-item"><a class="nav-link " href="/planner">Planner</a></li>
+            </ul>
+            <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> <%= data.name %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/work"><i class="bi bi-briefcase"></i> Work</a></li>
+                  <li><a class="dropdown-item" href="/life"><i class="bi bi-person-square"></i> Life</a></li>
+                  <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
+                </ul>
+              </div>
+            
+        </div>
+    </div>
+</nav>
 <section class="h-100">
     <div class="container h-100">
         <div class="row justify-content-md-center h-100">
@@ -25,7 +33,7 @@
                     <div class="card-body">
                         <h4 class="card-title" align="center"><b>Life Details</b></h4>
                         <!-- <h4 class="card-title">Life Details</h4> -->
-                        <form method="POST" class="my-login-validation" action="/work">
+                        <form method="POST" class="my-login-validation" action="/update_details/<%= data._id %>?_method=PUT">
             
                             <div class="row">
                                 <div class="col">
@@ -37,12 +45,20 @@
                                     </select>
                                 </div>
                                 
-                                <input type="hidden" id= 'username' name='username' value='<%= data.email %>'>
+                                <input type="hidden" id= 'username' name='username' value='<%= data.username %>'>
                                 <input type="hidden" id='name' name='name' value='<%= data.name %>'>
                                 <input type="hidden" name='password' name='password' value='<%= data.password %>'>
+                                <input type="hidden" id= 'profession' name='profession' value='<%= data.profession %>'>
+                                <input type="hidden" id='screentime' name='screentime' value='<%= data.screentime %>'>
+                                <input type="hidden" id='company' name='company' value='<%= data.company %>'>
+                                <input type="hidden" id='breaktime' name='breaktime' value='<%= data.breaktime %>'>
+                                <input type="hidden" id='position' name='position' value='<%= data.position %>'>
+                                <input type="hidden" id='worktime' name='worktime' value='<%= data.worktime %>'>
+                                <input type="hidden" id='techs' name='techs' value='<%= data.techs %>'>
+                                <input type="hidden" id='comments_work' name='comments_work' value='<%= data.comments_work %>'>
                                 <div class="col">
                                     <label for="leisuretime">Leisure Time</label>
-                                    <input id="leisuretime" type="number" min="0" class="form-control mt-1" placeholder="in Hrs" name="leisuretime" required autofocus>
+                                    <input id="leisuretime" type="number" min="0" class="form-control mt-1" value="<%= data.leisuretime %>" placeholder="in Hrs" name="leisuretime" required autofocus>
                                     <div class="invalid-feedback">
                                         Please provide leisure time
                                     </div>
@@ -54,14 +70,14 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="kids">No of Kids</label>
-                                    <input id="kids" type="number" min="0" class="form-control mt-1" name="kids">
+                                    <input id="kids" type="number" min="0" value="<%= data.kids %>" class="form-control mt-1" name="kids">
                                 </div>
                                 <!-- <div class="invalid-feedback">
                                     Invalid email
                                 </div> -->
                                 <div class="col">
                                     <label for="sleeptime">Sleep Time</label>
-                                    <input id="sleeptime" type="number" min="0"class="form-control mt-1" placeholder="in Hrs" name="sleeptime" required autofocus>
+                                    <input id="sleeptime" type="number" min="0" value="<%= data.sleeptime %>" class="form-control mt-1" placeholder="in Hrs" name="sleeptime" required autofocus>
                                 </div>
                             </div>
 
@@ -70,8 +86,8 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="hobbies">Hobbies</label>
-                                    <select class="form-select mt-1" name="hobbies" id="hobbies" aria-label="Default select example">
-                                        <option selected hidden disabled>Select</option>
+                                    <select class="form-select mt-1" name="hobbies" value="<%= data.hobbies %>" id="hobbies" aria-label="Default select example">
+                                        <option selected disabled hidden>Select</option>
                                         <option value="Basketball">Basketball</option>
                                         <option value="Photography">Photography</option>
                                         <option value="Reading">Reading</option>
@@ -81,7 +97,7 @@
 
                                 <div class="col">
                                     <label for="comments">Comments</label>
-                                    <textarea class="form-control mt-1" name="comments_life" id="comments_life" placeholder="Details related to schedule" aria-label="With textarea"></textarea>
+                                    <textarea class="form-control mt-1" name="comments_life" id="comments_life" placeholder="Details related to schedule" aria-label="With textarea"><%= data.comments_life %></textarea>
                                 </div>
                             </div>
 
@@ -90,7 +106,7 @@
 
                             <div class="form-group mt-2 d-grid">
                                 <button type="submit" class="btn btn-primary">
-                                    Next
+                                    Update
                                 </button>
                             </div>
                            
