@@ -42,7 +42,7 @@
                                 <input type="hidden" name='password' name='password' value='<%= data.password %>'>
                                 <div class="col">
                                     <label for="leisuretime">Leisure Time</label>
-                                    <input id="leisuretime" type="number" min="0" class="form-control mt-1" placeholder="in Hrs" name="leisuretime" required autofocus>
+                                    <input id="leisuretime" type="number" min="0" oninput="validity.valid||(value='');" class="form-control mt-1" placeholder="in Hrs" name="leisuretime" required autofocus>
                                     <div class="invalid-feedback">
                                         Please provide leisure time
                                     </div>
@@ -54,14 +54,14 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="kids">No of Kids</label>
-                                    <input id="kids" type="number" min="0" class="form-control mt-1" name="kids">
+                                    <input id="kids" type="number" min="0" oninput="validity.valid||(value='');" class="form-control mt-1" name="kids">
                                 </div>
                                 <!-- <div class="invalid-feedback">
                                     Invalid email
                                 </div> -->
                                 <div class="col">
                                     <label for="sleeptime">Sleep Time</label>
-                                    <input id="sleeptime" type="number" min="0"class="form-control mt-1" placeholder="in Hrs" name="sleeptime" required autofocus>
+                                    <input id="sleeptime" type="number" min="0" oninput="validity.valid||(value='');" class="form-control mt-1" placeholder="in Hrs" name="sleeptime" required autofocus>
                                 </div>
                             </div>
 

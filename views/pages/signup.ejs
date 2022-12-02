@@ -52,7 +52,7 @@
 
                             <div class="form-group mt-2">
                                 <label for="confirm-password">Confirm Password</label>
-                                <input id="confirm-password" type="password" class="form-control" name="confirm-password" placeholder="Re-enter Password" required data-eye />
+                                <input id="confirm-password" type="password" class="form-control" name="confirm-password" onkeyup="keyUpFuncConfirmPassword()" placeholder="Re-enter Password" required data-eye />
                                 <div class="invalid-feedback">
                                     Please confirm the password
                                 </div>
@@ -60,7 +60,7 @@
 
 
                             <div class="form-group mt-2 d-grid">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" id="register" class="btn btn-primary">
                                     Register
                                 </button>
                             </div>
@@ -75,6 +75,14 @@
     </div>
 </section>
 <script>
+    function keyUpFuncConfirmPassword() {
+		var password = document.getElementById("password");
+        var confirmPassword = document.getElementById("confirm-password");
+        if(password == confirmPassword) {
+            document.getElementById("register").disabled = false;
+        }
+
+	}
     window.onload = function(){
         var email = document.getElementById("email");
         var span1 = document.createElement("span");
@@ -127,7 +135,7 @@
         var email = document.getElementById("email");
         var password = document.getElementById("password");
         var confirmPassword = document.getElementById("confirm-password");
-        console.log(conf)
+        
         var form = document.getElementById("myForm");
         if(email.value == '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
             email.classList.add("error");

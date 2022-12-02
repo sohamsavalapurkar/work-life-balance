@@ -228,7 +228,7 @@
     var data = <%-JSON.stringify(userDetails) %>;
     var interval = parseInt(data.screentime) * 1000 * 2
     
-    setInterval(function() { if (window.confirm('New Tech Updates in ' + data.techs + ' If you click "ok" you would be redirected . Cancel will load this website ')) 
+    setTimeout(function() { if (window.confirm('New Tech Updates in ' + data.techs + ' If you click "ok" you would be redirected . Cancel will load this website ')) 
 {
     if(data.techs == "Python") {
         window.location.href='https://docs.python.org/3/whatsnew/index.html';
