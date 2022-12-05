@@ -1,0 +1,116 @@
+<%- include ('../partials/header') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/homepage"><span class="text-danger">Stress</span><span class="text-primary">Busters</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/homepage">Home</a></li>
+                <li class="nav-item"><a class="nav-link " href="/planner">Planner</a></li>
+            </ul>
+            <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> <%= userDetails.name %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/work"><i class="bi bi-briefcase"></i> Work</a></li>
+                  <li><a class="dropdown-item" href="/life"><i class="bi bi-person-square"></i> Life</a></li>
+                  <li><a class="dropdown-item" href="/reviews"><i class="bi bi-person-square"></i> My Reviews</a></li>
+                  <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
+                </ul>
+              </div>
+            
+        </div>
+    </div>
+</nav>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h3 class="card-header">My Reviews</h3>
+            </div>
+        </div>
+    </div>
+    <% var cnt=0 
+		discussions.forEach(function(discussion){%> 
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="card mb-2" id="<%= discussion._id %>">
+                <div class="card-header">
+                    <p id="Company"><%= discussion.Company %></p>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                    <p id="Answer"><%= discussion.Answer %></p>
+                    
+                    </blockquote>
+                    <button type="button" id="edit" class="btn btn-warning mr-3" data-bs-toggle="modal" data-bs-target="#addreviewmodal" data-company="<%= discussion.Company %>" data-answer="<%= discussion.Answer %>" data-id="<%= discussion._id %>">
+                    Edit
+                    </button>
+                    <form action="/reviews/<%= discussion._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+           
+            
+        </div>
+    
+    </div>
+    <% cnt++;
+		}); %>  
+        <div class="modal  fade" id="addreviewmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Review</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="my-login-validation" action="/reviews/edit">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label for="Company">Company</label>
+                                <input id="company" name="company" type="text" class="form-control" required autofocus>
+                                <div class="invalid-feedback">
+                                    Company
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id='id' name='id'>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label for="comments">Review</label>
+                                <textarea class="form-control" name="review" id="review" placeholder="Enter Review" aria-label="With textarea" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2 d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+   $('#addreviewmodal').on('show.bs.modal', function (event) {
+       
+  var button = $(event.relatedTarget) 
+  var company = button.data('company')
+  var id = button.data('id')
+  console.log(company)
+  var answer = button.data('answer') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  //modal.find('.modal-title').text('New message to ' + company)
+  modal.find('.modal-body #id').val(id)
+  modal.find('.modal-body #company').val(company)
+  modal.find('.modal-body textarea').val(answer)
+})
+</script>
+<%- include ('../partials/footer') %>

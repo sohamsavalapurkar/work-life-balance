@@ -62,6 +62,29 @@ router.get("/forgot", function (req, res) {
   res.render("forgot", {});
 });
 
+router.get("/reviews", function (req, res) {
+  if (req.user) {
+    console.log(req.user.username);
+    userDetails.find(
+      { username: req.user.username },
+      function (err, userDetail) {
+        if (err) throw error;
+        reviews.find({username: req.user.username}, function(err, review) {
+          console.log(review)
+          review.reverse()
+          if (err) throw err;
+          res.render("reviews", {
+            user: req.user,
+            userDetails: userDetail[0],
+            discussions: review
+          });
+        })
+          
+      });
+  }
+});
+
+
 router.post("/insertData", function (req, res) {
   Account.register(
     new Account({ username: req.body.username }),
@@ -107,6 +130,7 @@ router.get("/homepage", function (req, res) {
       function (err, userDetail) {
         if (err) throw error;
         reviews.find({}, function(err, review) {
+          review.reverse()
           if (err) throw err;
           res.render("homepage", {
             user: req.user,
@@ -124,7 +148,8 @@ router.post("/addReview", function(req, res){
     console.log(req.body)
     reviews.insert({
       Company : req.body.company,
-      Answer : req.body.review
+      Answer : req.body.review,
+      username : req.user.username
     }, function(err, account) {
         if (err) throw err;
         res.redirect('/homepage');
@@ -178,7 +203,29 @@ router.put('/update_details/:id', function(req, res) {
 			  });
 	
 });
+router.delete('/reviews/:id', function(req, res) {
+	console.log("hello in delete")
+  console.log(req.params.id)
+  reviews.findOneAndDelete({_id: req.params.id}, function (err, docs) {
+    if(err) console.log(err);
+    res.redirect('/reviews')
+    console.log("Successful deletion");
+  });
+ 
+});
 
+router.post('/reviews/edit', function(req, res) {
+  reviews.update({_id: req.body.id},
+    { $set: {
+      Company : req.body.company,
+      Answer : req.body.review,
+      username : req.user.username
+    }}, function(err, details) {
+      if (err) throw err;
+      res.redirect('/reviews')
+    });
+  
+});
 
 router.get("/logout", function (req, res) {
   req.logout();

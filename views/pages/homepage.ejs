@@ -16,6 +16,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/work"><i class="bi bi-briefcase"></i> Work</a></li>
                   <li><a class="dropdown-item" href="/life"><i class="bi bi-person-square"></i> Life</a></li>
+                  <li><a class="dropdown-item" href="/reviews"><i class="bi bi-person-square"></i> My Reviews</a></li>
                   <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                 </ul>
               </div>
@@ -29,7 +30,7 @@
 
         </div>
         <div class="col-md-4 v-divider ml-2">
-            <h2>Top Discussions</h2>
+            <h2>Top Reviews</h2>
                 <input type="text" id="searchBar" name="title" onkeyup="keyUpFunc()" class="form-control mb-2" placeholder="Search Companies">
             
                 <% var cnt=0 
@@ -65,7 +66,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" class="my-login-validation" action='/addReview' novalidate="">
+                <form method="POST" class="my-login-validation" action='/addReview'>
                     <div class="row mt-2">
                         <div class="col">
                             <label for="Company">Company</label>
@@ -78,7 +79,7 @@
                     <div class="row mt-2">
                         <div class="col">
                             <label for="comments">Review</label>
-                            <textarea class="form-control" name="review" id="review" placeholder="Enter Review" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" name="review" id="review" placeholder="Enter Review" aria-label="With textarea" required></textarea>
                         </div>
                     </div>
                     <div class="form-group mt-2 d-grid">
