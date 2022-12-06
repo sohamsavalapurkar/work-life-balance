@@ -1,164 +1,186 @@
 <%- include ('../partials/header') %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container px-4 px-lg-5">
-		<a class="navbar-brand" href="/"><span class="text-danger">Stress</span><span class="text-primary">Busters</span></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-				<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-			</ul>
-			<form class="d-flex">
-				<div class="text-center"><a class="btn btn-outline-light mt-auto" href="/">Login</a></div>
-			</form>
-			
-		</div>
-	</div>
-  </nav>
-<section class="h-100">
-    <div class="container h-100">
-        <div class="row justify-content-md-center h-100">
-            <div class="card-wrapper">
-                <div class="brand">
-                    <img src="img/logo.PNG" alt="bootstrap 4 login page">
-                </div>
-                <div class="card fat">
-                    <div class="card-body">
-                        <h4 class="card-title" align="center"><b>Welcome to <span class="text-danger">Stress</span><span class="text-primary">Busters</span> !</b></h4>
-                        <h4 class="card-title" align="center">Sign Up</h4>
-                        <form method="POST" class="my-login-validation" onSubmit="return validateForm()" id="myForm" action="/life">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input id="name" type="text" class="form-control" name="name" required autofocus placeholder="Enter your full name" />
-                                <div class="invalid-feedback">
-                                    Please provide your name
-                                </div>
-                            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="/"><span class="text-danger">Stress</span><span
+                    class="text-primary">Busters</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                </ul>
+                <form class="d-flex">
+                    <div class="text-center"><a class="btn btn-outline-light mt-auto" href="/">Login</a></div>
+                </form>
 
-                            <div class="form-group mt-2">
-                                <label for="email">E-Mail Address</label>
-                                <input id="email" type="email" class="form-control" name="email" placeholder="Enter email ex. abc@gmail.com" required />
-                                <div class="invalid-feedback">
-                                    Invalid email
-                                </div>
-                            </div>
+            </div>
+        </div>
+    </nav>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="brand">
+                        <img src="img/logo.PNG" alt="bootstrap 4 login page">
+                    </div>
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title" align="center"><b>Welcome to <span
+                                        class="text-danger">Stress</span><span class="text-primary">Busters</span> !</b>
+                            </h4>
+                            <h4 class="card-title" align="center">Sign Up</h4>
+                            <% if(typeof alert !='undefined' ) { %>
+                                <% alert.forEach(function(error) { %>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <%= error.msg %>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                    </div>
+                                    <% }) %>
+                                        <% } %>
+                                            <form method="POST" class="my-login-validation" id="myForm" action="/signup">
+                                                <div class="form-group">
+                                                    <label for="name">Name</label>
+                                                    <input id="name" type="text" class="form-control" name="name"
+                                                        required autofocus placeholder="Enter your full name" />
+                                                    <div class="invalid-feedback">
+                                                        Please provide your name
+                                                    </div>
+                                                </div>
 
-                            <div class="form-group mt-2">
-                                <label for="password">Password</label>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required data-eye />
-                                <div class="invalid-feedback">
-                                    Please set up the password
-                                </div>
-                            </div>
+                                                <div class="form-group mt-2">
+                                                    <label for="email">E-Mail Address</label>
+                                                    <input id="email" type="email" class="form-control" name="email"
+                                                        placeholder="Enter email ex. abc@gmail.com" required />
+                                                    <div class="invalid-feedback">
+                                                        Invalid email
+                                                    </div>
+                                                </div>
 
-                            <div class="form-group mt-2">
-                                <label for="confirm-password">Confirm Password</label>
-                                <input id="confirm-password" type="password" class="form-control" name="confirm-password" onkeyup="keyUpFuncConfirmPassword()" placeholder="Re-enter Password" required data-eye />
-                                <div class="invalid-feedback">
-                                    Please confirm the password
-                                </div>
-                            </div>
+                                                <div class="form-group mt-2">
+                                                    <label for="password">Password</label>
+                                                    <input id="password" type="password" class="form-control"
+                                                        name="password" placeholder="Enter Password" required
+                                                        data-eye />
+                                                    <div class="invalid-feedback">
+                                                        Please set up the password
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mt-2">
+                                                    <label for="confirm-password">Confirm Password</label>
+                                                    <input id="confirm-password" type="password" class="form-control"
+                                                        name="confirm-password"
+                                                        placeholder="Re-enter Password" required data-eye />
+                                                    <div class="invalid-feedback">
+                                                        Please confirm the password
+                                                    </div>
+                                                </div>
 
 
-                            <div class="form-group mt-2 d-grid">
-                                <button type="submit" id="register" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </form>
-                        <div class="mt-4 text-center">
-                            Already have an account? <a href="/">Login</a>
+                                                <div class="form-group mt-2 d-grid">
+                                                    <button type="submit" id="register" class="btn btn-primary">
+                                                        Register
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <div class="mt-4 text-center">
+                                                Already have an account? <a href="/">Login</a>
+                                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<script>
-    function keyUpFuncConfirmPassword() {
-		var password = document.getElementById("password");
-        var confirmPassword = document.getElementById("confirm-password");
-        if(password == confirmPassword) {
-            document.getElementById("register").disabled = false;
-        }
+    </section>
+    <script>
+        function keyUpFuncConfirmPassword() {
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirm-password");
+            if (password == confirmPassword) {
+                document.getElementById("register").disabled = false;
+            }
 
-	}
-    window.onload = function(){
-        var email = document.getElementById("email");
-        var span1 = document.createElement("span");
-        span1.innerHTML = "Email should be a valid email e.g. abc@gmail.com";
-        span1.style.display = "none"; //hide the span element
-        email.parentNode.appendChild(span1);
-
-        var password = document.getElementById("password");
-        var span2 = document.createElement("span");
-        span2.innerHTML = "The password field should contain at least six characters, one uppercase letter, one number and one special character.";
-        span2.style.display = "none";
-        password.parentNode.appendChild(span2);
-
-        var confirmPassword = document.getElementById("confirm-password");
-        var span3 = document.createElement("span");
-        span3.innerHTML = "Password and confirm password should match.";
-        span3.style.display = "none";
-        confirmPassword.parentNode.appendChild(span3);
-
-        email.onfocus = function(){
-    	span1.style.display = "inline";
-        email.classList.remove("error");
         }
+        // window.onload = function () {
+        //     var email = document.getElementById("email");
+        //     var span1 = document.createElement("span");
+        //     span1.innerHTML = "Email should be a valid email e.g. abc@gmail.com";
+        //     span1.style.display = "none"; //hide the span element
+        //     email.parentNode.appendChild(span1);
 
-        email.onblur = function(){
-            span1.style.display = "none";
-        }
+        //     var password = document.getElementById("password");
+        //     var span2 = document.createElement("span");
+        //     span2.innerHTML = "The password field should contain at least six characters, one uppercase letter, one number and one special character.";
+        //     span2.style.display = "none";
+        //     password.parentNode.appendChild(span2);
 
-        password.onfocus = function() {
-            span2.style.display = "inline";
-            password.classList.remove("error");
-        }
+        //     var confirmPassword = document.getElementById("confirm-password");
+        //     var span3 = document.createElement("span");
+        //     span3.innerHTML = "Password and confirm password should match.";
+        //     span3.style.display = "none";
+        //     confirmPassword.parentNode.appendChild(span3);
 
-        password.onblur = function() {
-            span2.style.display = "none";
-        }
+        //     email.onfocus = function () {
+        //         span1.style.display = "inline";
+        //         email.classList.remove("error");
+        //     }
 
-        confirmPassword.onfocus = function() {
-            span3.style.display = "inline";
-            confirmPassword.classList.remove("error");
-        }
+        //     email.onblur = function () {
+        //         span1.style.display = "none";
+        //     }
 
-        confirmPassword.onblur = function() {
-            span3.style.display = "none";
-        }
-        
-    
-    }
-    function validateForm() {
-        var email = document.getElementById("email");
-        var password = document.getElementById("password");
-        var confirmPassword = document.getElementById("confirm-password");
-        
-        var form = document.getElementById("myForm");
-        if(email.value == '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-            email.classList.add("error");
-            span1.style.display = "inline";
-            e.preventDefault();
-            return false
-        }
-        if(!password.value.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/)) {
-            password.classList.add("error");  
-            span2.style.display = "inline";
-            
-            e.preventDefault();
-            return false
-        }
-        if(password.value != confirmPassword.value) {
-            password.classList.add("error");
-            
-            span3.style.display = "inline";
-            confirmPassword.classList.add("error");
-            e.preventDefault();
-            return false
-        }
+        //     password.onfocus = function () {
+        //         span2.style.display = "inline";
+        //         password.classList.remove("error");
+        //     }
 
-    }
-</script>
-<%- include ('../partials/footer') %>
+        //     password.onblur = function () {
+        //         span2.style.display = "none";
+        //     }
+
+        //     confirmPassword.onfocus = function () {
+        //         span3.style.display = "inline";
+        //         confirmPassword.classList.remove("error");
+        //     }
+
+        //     confirmPassword.onblur = function () {
+        //         span3.style.display = "none";
+        //     }
+
+
+        // }
+        function validateForm() {
+            console.log('i am inside')
+            var email = document.getElementById("email");
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirm-password");
+
+            var form = document.getElementById("myForm");
+            if (email.value == '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+                email.classList.add("error");
+                span1.style.display = "inline";
+                e.preventDefault();
+                return false
+            }
+            if (!password.value.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/)) {
+                password.classList.add("error");
+                span2.style.display = "inline";
+
+                e.preventDefault();
+                return false
+            }
+            if (password.value != confirmPassword.value) {
+                password.classList.add("error");
+
+                span3.style.display = "inline";
+                confirmPassword.classList.add("error");
+                e.preventDefault();
+                return false
+            }
+
+        }
+    </script>
+    <%- include ('../partials/footer') %>

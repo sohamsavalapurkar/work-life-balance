@@ -1,65 +1,91 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-const config = require("config");
-var passport = require("passport");
-var Account = require("../models/account");
+const config = require('config');
+var passport = require('passport');
+const { check, validationResult, body } = require('express-validator');
+var Account = require('../models/account');
 
-var monk = require("monk");
-var db = monk(config.get("mongoURI"));
-var userDetails = db.get("userDetails");
-var reviews = db.get("reviews")
-
+var monk = require('monk');
+var db = monk(config.get('mongoURI'));
+var userDetails = db.get('userDetails');
+var reviews = db.get('reviews');
 
 /* GET home page. */
-router.get("/", function (req, res) {
-  res.render("index", {});
+router.get('/', function (req, res) {
+    res.render('index', {});
 });
 
-router.get("/work", function (req, res) {
-  if (req.user) {
-    console.log(req.user.username);
-    userDetails.find(
-      { username: req.user.username },
-      function (err, userDetail) {
-        if (err) throw error;
-          res.render("work_update", {
-            user: req.user,
-            data: userDetail[0]
-          });
-      }
-    );
-  }
+router.get('/work', function (req, res) {
+    if (req.user) {
+        console.log(req.user.username);
+        userDetails.find(
+            { username: req.user.username },
+            function (err, userDetail) {
+                if (err) throw error;
+                res.render('work_update', {
+                    user: req.user,
+                    data: userDetail[0],
+                });
+            }
+        );
+    }
 });
 
-router.get("/life", function (req, res) {
-  if (req.user) {
-    console.log(req.user.username);
-    userDetails.find(
-      { username: req.user.username },
-      function (err, userDetail) {
-        if (err) throw error;
-          res.render("life_updates", {
-            user: req.user,
-            data: userDetail[0]
-          });
-      }
-    );
-  }
+router.get('/life', function (req, res) {
+    if (req.user) {
+        console.log(req.user.username);
+        userDetails.find(
+            { username: req.user.username },
+            function (err, userDetail) {
+                if (err) throw error;
+                res.render('life_updates', {
+                    user: req.user,
+                    data: userDetail[0],
+                });
+            }
+        );
+    }
 });
 
-router.get("/signup", function (req, res) {
-  res.render("signup", {});
+router.get('/signup', function (req, res) {
+    res.render('signup');
 });
 
-router.post("/work", function (req, res) {
-  res.render("work", { data: req.body });
+router.post('/work', function (req, res) {
+    res.render('work', { data: req.body });
 });
 
-router.post("/life", function (req, res) {
-  res.render("life", { data: req.body });
-});
-router.get("/forgot", function (req, res) {
-  res.render("forgot", {});
+router.post(
+    '/signup',
+    [
+        check('email', 'Email is not valid').isEmail().normalizeEmail(),
+        check(
+            'password',
+            'The password field should contain at least six characters, one uppercase letter, one number and one special character.'
+        ).matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/, 'i'),
+        body('password')
+            .exists({ checkFalsy: true })
+            .withMessage('You must type a password'),
+        body('confirm-password')
+            .exists({ checkFalsy: true })
+            .withMessage('You must type a confirmation password')
+            .custom((value, { req }) => value === req.body.password)
+            .withMessage('The passwords do not match'),
+    ],
+    function (req, res) {
+        console.log('i am here', req.body);
+        const errors = validationResult(req);
+        console.log(errors);
+        if (!errors.isEmpty()) {
+            const alert = errors.array();
+            res.render('signup', {
+                alert,
+            });
+        } else res.render('life', { data: req.body });
+    }
+);
+router.get('/forgot', function (req, res) {
+    res.render('forgot', {});
 });
 
 router.get("/reviews", function (req, res) {
@@ -175,6 +201,15 @@ router.get("/planner", function (req, res) {
     );
   }
 });
+router.delete("/reviews/:id", function(req, res) {
+	console.log("hello in delete")
+  console.log(req.params.id)
+  reviews.findOneAndDelete({_id: req.params.id}, function (err, docs) {
+    if(err) console.log(err);
+    res.redirect('/reviews')
+    console.log("Successful deletion");
+  });
+})
 
 router.put('/update_details/:id', function(req, res) {
 		
