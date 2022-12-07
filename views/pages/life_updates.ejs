@@ -38,7 +38,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="family"> Family</label>
-                                    <select class="form-select mt-1" name="familydetails" id="family" aria-label="Default select example" onchange="disable('family', 'kids')" required>
+                                    <select class="form-select mt-1" name="familydetails" id="familydetails" aria-label="Default select example" onchange="disable('familydetails', 'kids')" required>
                                         <option selected>Select</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -86,8 +86,8 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="hobbies">Hobbies</label>
-                                    <select class="form-select mt-1" name="hobbies" value="<%= data.hobbies %>" id="hobbies" aria-label="Default select example">
-                                        <option selected disabled hidden>Select</option>
+                                    <select class="form-select mt-1" name="hobbies" id="hobbies" aria-label="Default select example">
+                                        <option selected value="">Select</option>
                                         <option value="Basketball">Basketball</option>
                                         <option value="Photography">Photography</option>
                                         <option value="Reading">Reading</option>
@@ -118,7 +118,18 @@
     </div>
 </section>
 <script>
-   function disable(select_val,input_id) {
+$(document).ready(function() {
+    var data = <%-JSON.stringify(data) %>;
+    console.log(data.hobbies)
+    $("#hobbies").val(data.hobbies);
+    $("#familydetails").val(data.familydetails);
+    if(data.familydetails == "No") {
+        console.log(data.familydetails)
+        $('#kids').attr('disabled', 'disabled');
+    }
+
+});
+function disable(select_val,input_id) {
                 var e = document.getElementById(select_val);
                 var strUser = e.options[e.selectedIndex].value;
                 if(strUser === "Yes"){

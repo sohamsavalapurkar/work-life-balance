@@ -100,7 +100,7 @@
                                         </div> -->
                                         <div class="col">
                                             <label for="comments">Comments</label>
-                                            <textarea class="form-control" name="comments_work"  id="comments_work" placeholder="Details related to schedule" aria-label="With textarea"><%= data.comments_work %></textarea>
+                                            <textarea class="form-control" name="comments_works"  id="comments_works" placeholder="Details related to schedule" aria-label="With textarea"><%= data.comments_works %></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,9 @@
 </section>
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#techs").val("Python");
+    var data = <%-JSON.stringify(data) %>;
+    console.log(data.techs)
+    $("#techs").val(data.techs);
 });
 
     </script>
