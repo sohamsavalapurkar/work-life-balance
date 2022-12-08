@@ -61,11 +61,11 @@
     </div>
     <% cnt++;
 		}); %>  
-        <div class="modal  fade" id="addreviewmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal  fade" id="addreviewmodal" tabindex="-1" aria-labelledby="addreviewLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Edit Review</h5>
+                  <h5 class="modal-title" id="addreviewLabel">Edit Review</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -98,20 +98,20 @@
     </div>
 </div>
 <script type="text/javascript">
-   $('#addreviewmodal').on('show.bs.modal', function (event) {
-       
+$("document").ready(function(){
+$('#addreviewmodal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) 
   var company = button.data('company')
   var id = button.data('id')
-  console.log(company)
-  var answer = button.data('answer') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  //console.log(company)
+  var answer = button.data('answer') 
   var modal = $(this)
-  //modal.find('.modal-title').text('New message to ' + company)
+  
   modal.find('.modal-body #id').val(id)
   modal.find('.modal-body #company').val(company)
   modal.find('.modal-body textarea').val(answer)
 })
+})
+   
 </script>
 <%- include ('../partials/footer') %>

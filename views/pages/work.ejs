@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="screentime">Screen Time</label>
-                                    <input id="screentime" name="screentime" placeholder="in hrs" type="number" oninput="validity.valid||(value='');" class="form-control" name="screentime" required autofocus>
+                                    <input id="screentime" name="screentime" placeholder="in hrs" max="24" type="number" oninput="validity.valid||(value='');" class="form-control" name="screentime" required autofocus>
                                     <div class="invalid-feedback">
                                         Please enter the screen time in hours
                                     </div>
@@ -74,7 +74,7 @@
                                 </div> -->
                                 <div class="col">
                                     <label for="worktime">Daily working hours</label>
-                                    <input id="worktime" name="worktime" type="number" oninput="validity.valid||(value='');" class="form-control" name="worktime" required autofocus>
+                                    <input id="worktime" name="worktime" type="number" max="24" oninput="validity.valid||(value='');" class="form-control" name="worktime" required autofocus>
                                 </div>
                             </div>
 
