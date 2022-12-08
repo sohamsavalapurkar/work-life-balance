@@ -8,6 +8,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="/homepage">Home</a></li>
                 <li class="nav-item"><a class="nav-link active" href="/planner">Planner</a></li>
+                <li class="nav-item"><a class="nav-link " href="/reviews"> My Reviews</a></li>
             </ul>
             <div class="btn-group">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,7 +30,30 @@
 
         </div>
     </div>
-
+    <div class="modal fade" id="technologymodal" tabindex="-1" aria-labelledby="technologymodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Technology Updates Available!!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            New Tech Updates in <%= userDetails.techs %> Click "redirect" to be redirected . Cancel will close the popup
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <% if(userDetails.techs == 'Python') {%> 
+                <a href="https://docs.python.org/3/whatsnew/index.html" type="button" class="btn btn-primary" >Redirect</a>
+            <%} else if(userDetails.techs == 'Java') {%>   
+              <a href="https://www.oracle.com/java/technologies/javase/8-whats-new.html" type="button" class="btn btn-primary" >Redirect</a>
+            <%} else if(userDetails.techs == 'C++') {%>
+              <a href="https://www.mycplus.com/featured-articles/cplusplus-17-features/" type="button" class="btn btn-primary" >Redirect</a>
+            <%}%>  
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 <script>
@@ -225,22 +249,26 @@
         
         calendar.render();
       });
+      $("document").ready(function(){
     var data = <%-JSON.stringify(userDetails) %>;
     var interval = parseInt(data.screentime) * 1000 * 2
-    
-    setTimeout(function() { if (window.confirm('New Tech Updates in ' + data.techs + ' If you click "ok" you would be redirected . Cancel will load this website ')) 
-{
-    if(data.techs == "Python") {
-        window.location.href='https://docs.python.org/3/whatsnew/index.html';
-    }
-    else if(data.techs == "Java") {
-        window.location.href='https://www.oracle.com/java/technologies/javase/8-whats-new.html';
-    }
-    else if(data.techs == "C++") {
-        window.location.href='https://www.mycplus.com/featured-articles/cplusplus-17-features/';
-    }
+    setTimeout(function(){
+    $("#technologymodal").modal("show");
+    },interval);
+    //setTimeout(function() { if (window.confirm('New Tech Updates in ' + data.techs + ' If you click "ok" you would be redirected . Cancel will load this website ')) 
+// {
+//     if(data.techs == "Python") {
+//         window.location.href='https://docs.python.org/3/whatsnew/index.html';
+//     }
+//     else if(data.techs == "Java") {
+//         window.location.href='https://www.oracle.com/java/technologies/javase/8-whats-new.html';
+//     }
+//     else if(data.techs == "C++") {
+//         window.location.href='https://www.mycplus.com/featured-articles/cplusplus-17-features/';
+//     }
 
-}; }, interval);
+// }; }, interval);
+})
 </script>
 
 <%- include ('../partials/footer') %>

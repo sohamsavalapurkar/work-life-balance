@@ -8,6 +8,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/homepage">Home</a></li>
                 <li class="nav-item"><a class="nav-link " href="/planner">Planner</a></li>
+                <li class="nav-item"><a class="nav-link " href="/reviews"> My Reviews</a></li>
             </ul>
             <div class="btn-group">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -16,7 +17,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/work"><i class="bi bi-briefcase"></i> Work</a></li>
                   <li><a class="dropdown-item" href="/life"><i class="bi bi-person-square"></i> Life</a></li>
-                  <li><a class="dropdown-item" href="/reviews"><i class="bi bi-person-square"></i> My Reviews</a></li>
+                  
                   <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                 </ul>
               </div>
@@ -57,6 +58,23 @@
           <!-- Modal -->
           
         
+    </div>
+    <div class="modal fade" id="screentimemodal" tabindex="-1" aria-labelledby="screentimemodalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Screen time Warning <i class="bi bi-exclamation-triangle text-warning font-weight-bold"></i></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            You have worked continuously for <%= userDetails.screentime %> hrs consider taking a break for <%= userDetails.breaktime %> minutes 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="modal  fade" id="addreviewmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -286,14 +304,21 @@
         
         calendar.render();
       });
+      $("document").ready(function(){
+      
     var data = <%-JSON.stringify(userDetails) %>;
     
     var discussions = <%-JSON.stringify(discussions)%>;
     
+  
     console.log(discussions[0])
     var interval = parseInt(data.screentime) * 1000 * 2
     var breaktime = data.breaktime
-    setTimeout(function() { alert("You have worked continuously for " + data.screentime + "hrs consider taking a break for " + breaktime + " minutes"); }, interval);
+    setTimeout(function(){
+    $("#screentimemodal").modal("show");
+    },interval);
+
+    //setTimeout(function() { alert("You have worked continuously for " + data.screentime + "hrs consider taking a break for " + breaktime + " minutes"); }, interval);
     cnt = 0
     discussions.forEach(function(discussion) {
 
@@ -306,7 +331,7 @@
         }
         cnt += 1
     })
-
+  });
     function keyUpFunc() {
 		input = document.getElementById('searchBar');
   		filter = input.value.toUpperCase();
