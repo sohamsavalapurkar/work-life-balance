@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="screentime">Screen Time</label>
-                                    <input id="screentime" name="screentime" type="number" value="<%= data.screentime %>" class="form-control" name="screentime" required autofocus>
+                                    <input id="screentime" name="screentime" type="number" value="<%= data.screentime %>" oninput="validity.valid||(value='');" class="form-control" name="screentime" required autofocus>
                                     <div class="invalid-feedback">
                                         Please enter the screen time in hours
                                     </div>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="breaktime">Break Time</label>
-                                    <input id="breaktime" name="breaktime" type="number" value="<%= data.breaktime %>" class="form-control" placeholder="in min" name="breaktime" required autofocus>
+                                    <input id="breaktime" name="breaktime" type="number" value="<%= data.breaktime %>" oninput="validity.valid||(value='');" class="form-control" placeholder="in min" name="breaktime" required autofocus>
                                 </div>
                             </div>
 
@@ -82,7 +82,7 @@
                                 </div> -->
                                 <div class="col">
                                     <label for="worktime">Daily working hours</label>
-                                    <input id="worktime" name="worktime" type="number" value="<%= data.worktime %>" class="form-control" name="worktime" required autofocus>
+                                    <input id="worktime" name="worktime" type="number" value="<%= data.worktime %>" oninput="validity.valid||(value='');" class="form-control" name="worktime" required autofocus>
                                 </div>
                             </div>
 

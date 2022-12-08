@@ -40,7 +40,7 @@
                                 <div class="col">
                                     <label for="family"> Family</label>
                                     <select class="form-select mt-1" name="familydetails" id="familydetails" aria-label="Default select example" onchange="disable('familydetails', 'kids')" required>
-                                        <option selected>Select</option>
+                                        <option selected value="">Select</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -59,7 +59,7 @@
                                 <input type="hidden" id='comments_work' name='comments_work' value='<%= data.comments_work %>'>
                                 <div class="col">
                                     <label for="leisuretime">Leisure Time</label>
-                                    <input id="leisuretime" type="number" min="0" class="form-control mt-1" value="<%= data.leisuretime %>" placeholder="in Hrs" name="leisuretime" required autofocus>
+                                    <input id="leisuretime" type="number" min="0" class="form-control mt-1" value="<%= data.leisuretime %>" oninput="validity.valid||(value='');" placeholder="in Hrs" name="leisuretime" required autofocus>
                                     <div class="invalid-feedback">
                                         Please provide leisure time
                                     </div>
@@ -71,14 +71,14 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="kids">No of Kids</label>
-                                    <input id="kids" type="number" min="0" value="<%= data.kids %>" class="form-control mt-1" name="kids">
+                                    <input id="kids" type="number" min="0" value="<%= data.kids %>" oninput="validity.valid||(value='');" class="form-control mt-1" name="kids">
                                 </div>
                                 <!-- <div class="invalid-feedback">
                                     Invalid email
                                 </div> -->
                                 <div class="col">
                                     <label for="sleeptime">Sleep Time</label>
-                                    <input id="sleeptime" type="number" min="0" value="<%= data.sleeptime %>" class="form-control mt-1" placeholder="in Hrs" name="sleeptime" required autofocus>
+                                    <input id="sleeptime" type="number" min="0" oninput="validity.valid||(value='');" value="<%= data.sleeptime %>" class="form-control mt-1" placeholder="in Hrs" name="sleeptime" required autofocus>
                                 </div>
                             </div>
 
